@@ -8,46 +8,19 @@ public:
         string ans = "";
         while(i >= 0 || j >= 0 || carry)
         {
-            int x = 0;
-            int y = 0;
-            if(j < 0)
+            int sum = carry;
+            if(i >= 0)
             {
-                y = 0;
+                sum += a[i] - '0';
             }
-            else
+            if(j >= 0)
             {
-                y = b[j] - '0';
+                sum += b[j] - '0';
             }
-            if(i < 0)
-            {
-                x = 0;
-            }
-            else
-            {
-                x = a[i] - '0';
-            }
-            if(x+y+carry == 2)
-            {
-                carry = 1;
-                ans += '0';
-            }
-            else if(x+y+carry == 0)
-            {
-                carry = 0;
-                ans += '0';
-            }
-            else if(x+y+carry == 1)
-            {
-                carry = 0;
-                ans += '1';
-            }
-            else if(x+y+carry == 3)
-            {
-                carry = 1;
-                ans += '1';
-            }
-            j--;
+            ans += '0' + (sum % 2);
+            carry = sum / 2;
             i--;
+            j--;
         }
         reverse(ans.begin(), ans.end());
         return ans;
