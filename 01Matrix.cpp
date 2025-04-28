@@ -26,6 +26,7 @@ public:
     }
     int dfs(int row, int col, int cnt)
     {
+        int ans = 0;
         if(mat[row][col] == 0)
         {
             return cnt;
@@ -37,10 +38,10 @@ public:
             if(valid(nextRow, nextCol) && !seen[nextRow][nextCol])
             {
                 seen[nextRow][nextCol] = true;
-                dfs(nextRow, nextCol, cnt + 1);
+                ans = dfs(nextRow, nextCol, cnt + 1);
             }
         }
-        return 0;
+        return ans;
     }
     int valid(int row, int col)
     {
