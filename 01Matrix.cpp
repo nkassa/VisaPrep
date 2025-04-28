@@ -2,48 +2,45 @@ class Solution {
 public:
     int m;
     int n;
-    vector<vector<int>> mat;
-    vector<vector<int>> directions = {{0,1}, {1,0}, {0,-1}, {-1,0}};
-    vector<vector<bool>> seen;
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) 
     {
-        this->mat = mat;
         m = mat.size();
         n = mat[0].size();
+        vector<vector<int>> directions = {{0,1}, {1,0}, {0,-1}, {-1,0}};
+        queue<pair<int,int>> queue;
         for(int row = 0; row < m; row++)
         {
             for(int col = 0; col < n; col++)
             {
-                if(mat[row][col] == 1)
+                if(mat[row][col] == 0)
                 {
-                    seen = vector(m, vector<bool>(n, false));
-                    seen[row][col] = true;
-                    mat[row][col] = dfs(row, col, 0);
+                    queue.push({row,col});
+                }
+                else
+                {
+                    mat[row][col] = INT_MAX;
+                }
+            }
+        }
+        while(!queue.empty())
+        {
+            int row = queue.front().first;
+            int col = queue.front().second;
+            queue.pop();
+            for(vector<int> direction: directions)
+            {
+                int nextRow = row + direction[0];
+                int nextCol = col + direction[1];
+                if(valid(nextRow, nextCol) && mat[nextRow][nextCol] > mat[row][col] + 1)
+                {
+                    mat[nextRow][nextCol] = mat[row][col] + 1;
+                    queue.push({nextRow,nextCol});
                 }
             }
         }
         return mat;
     }
-    int dfs(int row, int col, int cnt)
-    {
-        int ans = 0;
-        if(mat[row][col] == 0)
-        {
-            return cnt;
-        }
-        for(vector<int> direction: directions)
-        {
-            int nextRow = row + direction[0];
-            int nextCol = col + direction[1];
-            if(valid(nextRow, nextCol) && !seen[nextRow][nextCol])
-            {
-                seen[nextRow][nextCol] = true;
-                ans = dfs(nextRow, nextCol, cnt + 1);
-            }
-        }
-        return ans;
-    }
-    int valid(int row, int col)
+    bool valid(int row, int col)
     {
         return row >= 0 && row < m && col >= 0 && col < n;
     }
