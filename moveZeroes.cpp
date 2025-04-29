@@ -7,9 +7,8 @@ public:
         {
             if(nums[left] == 0 && nums[right] != 0)
             {
-                int temp = nums[right];
-                nums[right] = nums[left];
-                nums[left] = temp;
+                nums[left] = nums[right];
+                nums[right] = 0;
                 left++;
             }
             else if(nums[left] != 0)
