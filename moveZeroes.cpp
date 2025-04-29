@@ -12,6 +12,10 @@ public:
                 nums[left] = temp;
                 left++;
             }
+            else if(nums[left] != 0)
+            {
+                left++;
+            }
         }
     }
 };
