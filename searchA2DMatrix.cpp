@@ -6,10 +6,10 @@ public:
         int n = matrix[0].size();
         int left = 0;
         int right = (m*n)-1;
-        while(left < right)
+        while(left <= right)
         {
             int mid = left + (right-left)/2;
-            int row = mid / m;
+            int row = mid / n;
             int col = mid % n;
             if(matrix[row][col] == target)
             {
@@ -21,7 +21,7 @@ public:
             }
             else
             {
-                left = mid;
+                left = mid+1;
             }
         }
         return false;
