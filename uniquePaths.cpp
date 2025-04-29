@@ -4,7 +4,7 @@ public:
     int uniquePaths(int m, int n) 
     {
         grid = vector(m, vector<int>(n, -1));
-        grid[0][0] = 0;
+        grid[0][0] = 1;
         return dp(m-1, n-1);
     }
     int dp(int row, int col)
@@ -22,7 +22,6 @@ public:
         {
             way += dp(row, col-1);
         }
-        way += 1;
         grid[row][col] = way;
         return grid[row][col];
     }
