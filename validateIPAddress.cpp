@@ -2,40 +2,41 @@ class Solution {
 public:
     string validIPAddress(string queryIP) 
     {
-        if(queryIP[queryIP.size()-1] == '.' || queryIP[queryIP.size()-1] == ':')
+        vector<string> IP;
+        if(queryIP.find('.') < queryIP.size())
         {
-            return "Neither";
+            string temp = "";
+            stringstream ss(queryIP);
+            while(getline(ss, temp, '.'))
+            {
+                IP.push_back(temp);
+            }
+            if(IP.size() == 4)
+            {
+                return ipv4(IP);
+            }
         }
-        vector<string> IP4;
-        string temp = "";
-        stringstream ss(queryIP);
-        while(getline(ss, temp, '.'))
+        if(queryIP.find(':') < queryIP.size())
         {
-            IP4.push_back(temp);
-        }
-        vector<string> IP6;
-        temp = "";
-        stringstream s(queryIP);
-        while(getline(s, temp, ':'))
-        {
-            IP6.push_back(temp);
-        }
-        cout << IP6.size() << endl;
-        if(IP4.size() == 4)
-        {
-            return ipv4(IP4);
-        }
-        else if(IP6.size() == 8)
-        {
-            return ipv6(IP6);
+            string temp = "";
+            stringstream ss(queryIP);
+            while(getline(ss, temp, ':'))
+            {
+                IP.push_back(temp);
+            }
+            if(IP.size() == 8)
+            {
+                return ipv6(IP);
+            }
         }
         return "Neither";
     }
-    string ipv4(vector<string> IP4)
+
+    string ipv4(vector<string> IP)
     {
-        for(string sec: IP4)
+        for(string sec: IP)
         {
-            if(sec.size() == 0 || sec.size() > 1 && sec[0]-'0' == 0 || stoi(sec) > 255 || stoi(sec) < 0)
+            if(sec.size() > 1 && sec[0]-'0' == 0 || stoi(sec) > 255 || stoi(sec) < 0)
             {
                 return "Neither";
             }
@@ -49,9 +50,9 @@ public:
         }
         return "IPv4";
     }
-    string ipv6(vector<string> IP6)
+    string ipv6(vector<string> IP)
     {
-        for(string sec: IP6)
+        for(string sec: IP)
         {
             if(sec.size() > 4 || sec.size() < 1)
             {
