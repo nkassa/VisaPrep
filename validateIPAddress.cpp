@@ -2,9 +2,9 @@ class Solution {
 public:
     string validIPAddress(string queryIP) 
     {
-        vector<string> IP;
         if(queryIP.find('.') < queryIP.size())
         {
+            vector<string> IP;
             string temp = "";
             stringstream ss(queryIP);
             while(getline(ss, temp, '.'))
@@ -18,6 +18,7 @@ public:
         }
         if(queryIP.find(':') < queryIP.size())
         {
+            vector<string> IP;
             string temp = "";
             stringstream ss(queryIP);
             while(getline(ss, temp, ':'))
@@ -36,7 +37,7 @@ public:
     {
         for(string sec: IP)
         {
-            if(sec.size() > 1 && sec[0]-'0' == 0 || stoi(sec) > 255 || stoi(sec) < 0)
+            if(sec.empty() || sec.size() > 1 && sec[0] == '0')
             {
                 return "Neither";
             }
@@ -47,6 +48,11 @@ public:
                     return "Neither";
                 }
             }
+            int num = stoi(sec);
+            if(num < 0 || num > 255)
+            {
+                return "Neither";
+            }
         }
         return "IPv4";
     }
@@ -54,7 +60,7 @@ public:
     {
         for(string sec: IP)
         {
-            if(sec.size() > 4 || sec.size() < 1)
+            if(sec.size() > 4 || sec.empty())
             {
                 return "Neither";
             }
