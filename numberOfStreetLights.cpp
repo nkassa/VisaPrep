@@ -8,7 +8,9 @@ int findNumberOfPosition(int n, vector<vector<int>>& lights)
     {
         int position = light[0];
         int radius = light[1];
-        lengthOfRoad.push_back({position-radius, position+radius});
+        int start = max(0, position-radius);
+        int end = min(n, position+radius);
+        lengthOfRoad.push_back({start, end});
     }
     sort(lengthOfRoad.begin(), lengthOfRoad.end());
     vector<pair<int,int>> newRoad;
@@ -16,7 +18,7 @@ int findNumberOfPosition(int n, vector<vector<int>>& lights)
     {
         if(!newRoad.empty() && newRoad.back().second >= lengthOfRoad[i].first)
         {
-            newRoad[newRoad.size()-1] = {newRoad.back().first, max(newRoad.back().second, lengthOfRoad[i].second)};
+            newRoad.back().second = max(newRoad.back().second, lengthOfRoad[i].second);
         }
         else
         {
