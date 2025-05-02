@@ -14,23 +14,19 @@ int findNumberOfPosition(int n, vector<vector<int>>& lights)
     vector<pair<int,int>> newRoad;
     for(int i = 0; i < lengthOfRoad.size(); i++)
     {
-        if(!newRoad.empty() && lengthOfRoad[i].second < newRoad.back().second)
+        if(!newRoad.empty() && newRoad.back().second >= lengthOfRoad[i].first)
         {
-            newRoad[newRoad.size()-1] = {newRoad.back().first, newRoad.back().second};
-        }
-        else if(!newRoad.empty() && newRoad.back().second > lengthOfRoad[i].first)
-        {
-            newRoad[newRoad.size()-1] = {newRoad.back().first, lengthOfRoad[i].second};
-            ans++;
+            newRoad[newRoad.size()-1] = {newRoad.back().first, max(newRoad.back().second, lengthOfRoad[i].second)};
         }
         else
         {
             newRoad.push_back(lengthOfRoad[i]);
+            ans++;
         }
     }
-    if(newRoad.size() != 1)
+    if(newRoad.size() != 1 || 0 < newRoad[0].first || n > newRoad[0].second)
     {
         return -1;
     }
-    return 0 >= newRoad[0][0] && n <= newRoad[0][1];
+    return ans;
 }
