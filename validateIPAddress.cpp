@@ -2,12 +2,11 @@ class Solution {
 public:
     string validIPAddress(string queryIP) 
     {
-        int n = queryIP.size();
-        if(n >= 1 && (queryIP[n-1] == '.' || queryIP[n-1] == ':'))
+        if(queryIP.size() == 0 || queryIP.back() == '.' || queryIP.back() == ':')
         {
             return "Neither";
         }
-        if(queryIP.find('.') < queryIP.size())
+        if(queryIP.find('.') < string::npos)
         {
             vector<string> IP;
             string temp = "";
@@ -21,7 +20,7 @@ public:
                 return ipv4(IP);
             }
         }
-        if(queryIP.find(':') < queryIP.size())
+        if(queryIP.find(':') < string::npos)
         {
             vector<string> IP;
             string temp = "";
@@ -46,18 +45,14 @@ public:
             {
                 return "Neither";
             }
-            int num = 0;
-            int digit = 1;
-            for(int i = sec.size()-1; i >= 0; i--)
+            for(char c: sec)
             {
-                if(!isdigit(sec[i]))
+                if(!isdigit(c))
                 {
                     return "Neither";
                 }
-                num += (sec[i]-'0') * digit;
-                digit *= 10;
             }
-            cout << num << endl; 
+            int num = stoi(sec);
             if(num < 0 || num > 255)
             {
                 return "Neither";
