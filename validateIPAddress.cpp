@@ -2,6 +2,11 @@ class Solution {
 public:
     string validIPAddress(string queryIP) 
     {
+        int n = queryIP.size();
+        if(n >= 1 && (queryIP[n-1] == '.' || queryIP[n-1] == ':'))
+        {
+            return "Neither";
+        }
         if(queryIP.find('.') < queryIP.size())
         {
             vector<string> IP;
@@ -37,18 +42,22 @@ public:
     {
         for(string sec: IP)
         {
-            if(sec.empty() || sec.size() > 1 && sec[0] == '0')
+            if(sec.empty() || sec.size() > 1 && sec[0] == '0' || sec.size() > 3)
             {
                 return "Neither";
             }
-            for(char c: sec)
+            int num = 0;
+            int digit = 1;
+            for(int i = sec.size()-1; i >= 0; i--)
             {
-                if(isdigit(c) == false)
+                if(!isdigit(sec[i]))
                 {
                     return "Neither";
                 }
+                num += (sec[i]-'0') * digit;
+                digit *= 10;
             }
-            int num = stoi(sec);
+            cout << num << endl; 
             if(num < 0 || num > 255)
             {
                 return "Neither";
@@ -66,8 +75,7 @@ public:
             }
             for(char c: sec)
             {
-                c = tolower(c);
-                if(isxdigit(c) == false)
+                if(!isxdigit(c))
                 {
                     return "Neither";
                 }
