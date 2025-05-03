@@ -11,32 +11,19 @@ public:
         int n = prefix.size();
         for(int i = 0; i < n; i++)
         {
+            int left = 0;
+            int right = prefix[n-1] - prefix[i];
             if(i == 0)
             {
-                int left = 0;
-                int right = prefix[n-1] - prefix[i];
-                if( right == left)
-                {
-                    return i;
-                }
+                left = 0;
             }
-            else if(i == n-1)
+            else 
             {
-                int left = prefix[i-1];
-                int right = 0;
-                if( right == left)
-                {
-                    return i;
-                }
+                left = prefix[i-1];
             }
-            else
+            if(right == left)
             {
-                int left = prefix[i-1];
-                int right = prefix[n-1] - prefix[i];
-                if(right == left)
-                {
-                    return i;
-                }
+                return i;
             }
         }
         return -1;
