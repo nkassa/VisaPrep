@@ -18,12 +18,12 @@ public:
         {
             return 0;
         }
-        dfs(root, ans, targetSum);
+        dfs(root, targetSum);
         pathSum(root->left, targetSum);
         pathSum(root->right, targetSum);
         return ans;
     }
-    void dfs(TreeNode* root, int& ans, long targetSum)
+    void dfs(TreeNode* root, long int targetSum)
     {
         if(root == nullptr)
         {
@@ -34,7 +34,7 @@ public:
         {
             ans++;
         }
-        dfs(root->left, ans, targetSum);
-        dfs(root->right, ans, targetSum);
+        dfs(root->left, targetSum);
+        dfs(root->right, targetSum);
     }
 };
