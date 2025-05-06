@@ -25,6 +25,6 @@ public:
             right++;
         }
         cnt = right-left-1;
-        ans[cnt] = s.substr(left+1, right-left-1);
+        ans[cnt] = s.substr(left+1, cnt);
     }
 };
