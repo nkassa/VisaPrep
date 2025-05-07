@@ -12,17 +12,12 @@ public:
             }
             if(temp.size() != 0 && (s[i] == ' ' || i == 0))
             {
-                int left = 0;
-                int right = temp.size()-1;
-                while(left < right)
+                string ordered = "";
+                for(int j = temp.size()-1; j >= 0; j--)
                 {
-                    char t = temp[left];
-                    temp[left] = temp[right];
-                    temp[right] = t;
-                    left++;
-                    right--;
+                    ordered += temp[j];
                 }
-                ans += temp;
+                ans += ordered;
                 ans += " ";
                 temp = "";
             }
