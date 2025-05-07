@@ -1,17 +1,21 @@
 class Solution {
 public:
-    vector<vector<int>> grid;
+    vector<vector<int>> memo;
+    int m;
+    int n;
     int uniquePaths(int m, int n) 
     {
-        grid = vector(m, vector<int>(n, -1));
-        grid[0][0] = 1;
+        this->m = m;
+        this->n = n;
+        memo = vector(m, vector<int>(n, -1));
+        memo[0][0] = 1;
         return dp(m-1, n-1);
     }
     int dp(int row, int col)
     {
-        if(grid[row][col] != -1)
+        if(memo[row][col] != -1)
         {
-            return grid[row][col];
+            return memo[row][col];
         }
         int way = 0;
         if(row > 0)
@@ -22,7 +26,7 @@ public:
         {
             way += dp(row, col-1);
         }
-        grid[row][col] = way;
-        return grid[row][col];
+        memo[row][col] = way;
+        return memo[row][col];
     }
 };
