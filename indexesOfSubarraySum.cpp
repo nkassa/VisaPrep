@@ -10,19 +10,20 @@ class Solution {
     vector<int> subarraySum(vector<int> &arr, int target) 
     {
         // code here
-        unordered_map<int,int> seen;
-        seen[0] = 0;
         int sum = 0;
-        vector<int> ans; 
-        for(int i = 0; i < arr.size(); i++)
+        int left = 0;
+        for(int right = 0; right < arr.size(); right++)
         {
-            sum += arr[i];
-            int diff = sum - target;
-            if(seen.find(diff) != seen.end())
+            sum += arr[right];
+            while(sum >= target)
             {
-                return {seen[diff], i};
+                if(sum == target)
+                {
+                    return {left+1,right+1};
+                }
+                sum -= arr[left];
+                left++;
             }
-            seen[sum] = i;
         }
         return {-1};
     }
