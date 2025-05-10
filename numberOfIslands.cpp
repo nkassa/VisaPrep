@@ -10,7 +10,7 @@ public:
         m = grid.size();
         n = grid[0].size();
         this->grid = grid;
-        seen = vector(m, vector<int>(n, false));
+        seen = vector(m, vector<bool>(n, false));
         int ans = 0;
         for(int row = 0; row < m; row++)
         {
@@ -26,13 +26,21 @@ public:
         }
         return ans;
     }
-    int dfs(int row, int col)
+    void dfs(int row, int col)
     {
         for(vector<int> direction: directions)
         {
             int nextRow = row + direction[0];
             int nextCol = col + direction[1];
-            if(valid())
+            if(valid(nextRow, nextCol) && !seen[nextRow][nextCol])
+            {
+                seen[nextRow][nextCol] = true;
+                dfs(nextRow, nextCol);
+            }
         }
+    }
+    bool valid(int row, int col)
+    {
+        return 0 <= row && row < m && 0 <= col && col < n && grid[row][col] == '1';
     }
 };
