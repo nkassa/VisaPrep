@@ -5,13 +5,22 @@ class Solution {
         // code here
         for(int i = 0; i < s.size(); i++)
         {
-            int even = pali(i, i+1, 0, s);
-            int odd = pali(i,i,0);
+            pali(i, i+1, s);
+            pali(i,i,s);
         }
         return ans;
     }
-    void pali(int left, int right, int size, string &s)
+    void pali(int left, int right, string &s)
     {
-        while(left >= 0 && right <= s.size())
+        while(left >= 0 && right <= s.size()-1 && s[left]==s[right])
+        {
+            left--;
+            right;
+        }
+        int size = (right-1) - (left+1) - 1;
+        if(ans.size() < size)
+        {
+            ans = s.substr(left+1, size());
+        }
     }
 };
