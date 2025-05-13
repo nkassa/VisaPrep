@@ -15,12 +15,12 @@ class Solution {
         while(left >= 0 && right <= s.size()-1 && s[left]==s[right])
         {
             left--;
-            right;
+            right++;
         }
-        int size = (right-1) - (left+1) - 1;
+        int size = (right-1) - (left+1) + 1;
         if(ans.size() < size)
         {
-            ans = s.substr(left+1, size());
+            ans = s.substr(left+1, size);
         }
     }
 };
