@@ -1,17 +1,10 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
 class Solution {
-public:
-    void deleteNode(ListNode* node) 
+  public:
+    // Function to delete a node without any reference to the head pointer.
+    void deleteNode(Node* del_node) 
     {
-        ListNode* next = node->next;
-        node->val = next->val;
-        node->next = next->next;
+        // Your code here
+        del_node->data = del_node->next->data;
+        del_node->next = del_node->next->next;
     }
 };
