@@ -3,7 +3,7 @@ public:
     int maxProduct(vector<int>& nums) 
     {
         int sum = 1;
-        int ans = 0;
+        int ans = INT_MIN;
         for(int num: nums)
         {
             sum *= num;
