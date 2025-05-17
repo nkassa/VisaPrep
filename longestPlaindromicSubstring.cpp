@@ -3,28 +3,24 @@ class Solution {
     string longestPalindrome(string s) 
     {
         string ans = "";
-        int size = 0;
         // code here
         for(int i = 0; i < s.size(); i++)
         {
-            helper(i, i, s);
-            helper(i, i + 1, s);
+            helper(i, i, s, ans);
+            helper(i, i + 1, s, ans);
         }
         return ans;
     }
-    void helper(int left, int right, string& s)
+    void helper(int left, int right, string& s, string& ans)
     {
-        int cnt = 0;
         while(left >= 0 && right < s.size() && s[left] == s[right])
         {
-            left++;
-            right--;
-            cnt++;
+            left--;
+            right++;
         }
-        if(size < cnt)
+        if(ans.size() < right-left-1)
         {
-            size = cnt;
-            ans = s.sbstr(left, right-left);
+            ans = s.substr(left+1, right-left-1);
         }
     }
 };
