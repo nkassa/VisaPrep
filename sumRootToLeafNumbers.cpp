@@ -19,12 +19,7 @@ public:
         long int sum = 0;
         for(string path: paths)
         {
-            long int digit = 1;
-            for(int i = path.size()-1; i >= 0; i--)
-            {
-                sum += (digit * path[i]);
-                digit *= 10;
-            }
+            sum += stol(path);
         }
         return sum;
     }
@@ -34,7 +29,7 @@ public:
         {
             return;
         }
-        path += root->val;
+        path += to_string(root->val);
         if(!root->left && !root->right)
         {
             paths.push_back(path);
