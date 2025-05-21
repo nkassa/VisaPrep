@@ -21,12 +21,9 @@ public:
         }
         for(int i = 1; i < list.size(); i++)
         {
-            if(root != nullptr)
-            {
-                root->left = nullptr;
-                root->right = new TreeNode(list[i]);
-                root = root->right;
-            }
+            root->left = nullptr;
+            root->right = new TreeNode(list[i]);
+            root = root->right;
         }
     }
     void dfs(TreeNode* root)
@@ -39,4 +36,4 @@ public:
         dfs(root->left);
         dfs(root->right);
     }
-};//
+};
