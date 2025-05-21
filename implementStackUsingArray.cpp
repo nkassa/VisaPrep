@@ -1,0 +1,20 @@
+void MyStack ::push(int x) 
+{
+    // Your Code
+    top += 1;
+    arr[top] = x;
+}
+
+// Function to remove an item from top of the stack.
+int MyStack ::pop() 
+{
+    // Your Code
+    if(arr[top] == 0)
+    {
+        return -1;
+    }
+    int val = arr[top];
+    arr[top] = 0;
+    top--;
+    return val;
+}
