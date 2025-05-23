@@ -37,7 +37,7 @@ public:
             {
                 Node* node = queue.front();
                 queue.pop();
-                curr.push_back(root->val);
+                curr.push_back(node->val);
                 for(Node* child: node->children)
                 {
                     queue.push(child);
