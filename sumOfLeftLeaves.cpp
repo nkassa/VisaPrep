@@ -14,11 +14,7 @@ public:
     int ans = 0;
     int sumOfLeftLeaves(TreeNode* root) 
     {
-        if(!root->left && ! root->right)
-        {
-            return 0;
-        }
-        dfs(root, 0);
+        dfs(root, 1);
         return ans;
     }
     void dfs(TreeNode* root, int leftSide)
@@ -27,7 +23,7 @@ public:
         {
             return;
         }
-        if(!root->left && ! root->right && leftSide == 0)
+        if(!root->left && !root->right && leftSide == 0)
         {
             ans += root->val;
         }
