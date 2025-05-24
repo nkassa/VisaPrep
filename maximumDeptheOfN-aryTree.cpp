@@ -37,13 +37,9 @@ public:
             {
                 Node* node = queue.front();
                 queue.pop();
-                if(node->left)
+                for(Node* next: node.children)
                 {
-                    queue.push(node->left);
-                }
-                if(node->right)
-                {
-                    queue.push(node->right);
+                    queue.push(next);
                 }
             }
         }
