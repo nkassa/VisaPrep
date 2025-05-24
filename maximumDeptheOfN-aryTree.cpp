@@ -28,7 +28,7 @@ public:
         }
         queue<Node*> queue;
         queue.push(root);
-        int ans;
+        int ans = 0;
         while(!queue.empty())
         {
             int size = queue.size();
