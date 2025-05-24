@@ -1,0 +1,52 @@
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val) {
+        val = _val;
+    }
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+public:
+    int maxDepth(Node* root) 
+    {
+        if(!root.children.size() == 0)
+        {
+            return 1;
+        }
+        queue<Node*> queue;
+        queue.push(root);
+        int ans;
+        while(!queue.empty())
+        {
+            int size = queue.size();
+            ans++;
+            for(int i = 0; i < size; i++)
+            {
+                Node* node = queue.front();
+                queue.pop();
+                if(node->left)
+                {
+                    queue.push(node->left);
+                }
+                if(node->right)
+                {
+                    queue.push(node->right);
+                }
+            }
+        }
+        return ans;
+    }
+};
