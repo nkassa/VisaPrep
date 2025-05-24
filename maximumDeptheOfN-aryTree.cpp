@@ -22,9 +22,9 @@ class Solution {
 public:
     int maxDepth(Node* root) 
     {
-        if(!root.children.size() == 0)
+        if(!root)
         {
-            return 1;
+            return 0;
         }
         queue<Node*> queue;
         queue.push(root);
@@ -37,7 +37,7 @@ public:
             {
                 Node* node = queue.front();
                 queue.pop();
-                for(Node* next: node.children)
+                for(Node* next: node->children)
                 {
                     queue.push(next);
                 }
