@@ -15,15 +15,15 @@ public:
     TreeNode* increasingBST(TreeNode* root) 
     {
         dfs(root);
-        TreeNode* node = new TreeNode(list[0]);
-        TreeNode* ans = node;
-        for(int i = 1; i < list.size(); i++)
+        TreeNode* dummy = new TreeNode(0);
+        TreeNode* ans = dummy;
+        for(int i = 0; i < list.size(); i++)
         {
-            TreeNode* next = new TreeNode(list[i]);
-            node->right = next;
-            node = node->right;
+            TreeNode* node = new TreeNode(list[i]);
+            dummy->right = node;
+            dummy = dummy->right;
         }
-        return ans;
+        return ans->right;
     }
     void dfs(TreeNode* root)
     {
