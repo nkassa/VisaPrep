@@ -15,7 +15,6 @@ public:
     int getMinimumDifference(TreeNode* root) 
     {
         dfs(root);
-        sort(list.begin(), list.end());
         int diff = INT_MAX;
         for(int i = 1; i < list.size(); i++)
         {
@@ -29,8 +28,8 @@ public:
         {
             return;
         }
-        list.push_back(root->val);
         dfs(root->left);
+        list.push_back(root->val);
         dfs(root->right);
     }
 };
